@@ -17,10 +17,18 @@ contract Revitu is
 {
     bytes32 public constant MINTER_ROLE = keccak256("MINTER_ROLE");
     bytes32 public constant UPGRADER_ROLE = keccak256("UPGRADER_ROLE");
+
     uint256 private _nextTokenId;
     string private baseTokenURI;
+
     mapping(uint256 => bool) lockMap;
+
     uint256[49] private __gap;
+
+    modifier transferValidator(uint256 _tokenId) {
+        require(lockMap[_tokenId], "this NFT is locked..");
+        _;
+    }
 
     function initialize(
         address _defaultAdmin,
@@ -219,10 +227,5 @@ contract Revitu is
         } else {
             return true;
         }
-    }
-
-    modifier transferValidator(uint256 _tokenId) {
-        require(lockMap[_tokenId], "this NFT is locked..");
-        _;
     }
 }
