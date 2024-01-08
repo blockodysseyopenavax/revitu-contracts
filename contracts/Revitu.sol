@@ -25,6 +25,15 @@ contract Revitu is
 
     uint256[47] private __gap;
 
+    /**
+     * @dev Disable implementation's initializer.
+     * See https://docs.openzeppelin.com/upgrades-plugins/1.x/writing-upgradeable#initializing_the_implementation_contract
+     */
+    /// @custom:oz-upgrades-unsafe-allow constructor
+    constructor() {
+        _disableInitializers();
+    }
+
     modifier transferValidator(uint256 _tokenId) {
         require(lockMap[_tokenId], "this NFT is locked..");
         _;
