@@ -23,7 +23,7 @@ contract Revitu is
 
     mapping(uint256 => bool) lockMap;
 
-    uint256[49] private __gap;
+    uint256[47] private __gap;
 
     modifier transferValidator(uint256 _tokenId) {
         require(lockMap[_tokenId], "this NFT is locked..");
