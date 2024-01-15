@@ -1,0 +1,14 @@
+[profile.default]
+src = "contracts"              # default: "src"
+out = "out"                    # default: "artifacts"
+libs = ["node_modules", "lib"] # default: ["lib"]
+test = "test/foundry"          # default: "test"
+script = "scripts/foundry"     # default: "script"
+cache_path = "forge-cache"     # defualt: "cache"
+
+evm_version = "london"
+# bytecode_hash = "none"
+
+# recommended when testing and debugging
+# https://hardhat.org/hardhat-network/docs/reference#solidity-optimizer-support
+optimizer = false
