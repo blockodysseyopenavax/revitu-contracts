@@ -9,7 +9,8 @@
     "test": "hardhat test",
     "format": "prettier --write .",
     "lint": "solhint 'contracts/**/*.sol'",
-    "lint:fix": "solhint --fix --noPrompt 'contracts/**/*.sol'"
+    "lint:fix": "solhint --fix --noPrompt 'contracts/**/*.sol'",
+    "compare": "hardhat compile --force && forge build --force && hardhat run scripts/compare-bytecodes.ts"
   },
   "keywords": [],
   "author": "",
