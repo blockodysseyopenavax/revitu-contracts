@@ -3,7 +3,21 @@ import "@nomicfoundation/hardhat-toolbox";
 import "@openzeppelin/hardhat-upgrades";
 import "dotenv/config";
 
+const deployer = process.env.REVITU_DEPLOYER_PRIVATE_KEY || "";
+
 const config: HardhatUserConfig = {
+  networks: {
+    baobab: {
+      url: "https://public-en-baobab.klaytn.net",
+      chainId: 1001,
+      accounts: [deployer],
+    },
+    cypress: {
+      url: "https://public-en-cypress.klaytn.net",
+      chainId: 8217,
+      accounts: [deployer],
+    },
+  },
   solidity: {
     version: "0.8.19",
     settings: {
