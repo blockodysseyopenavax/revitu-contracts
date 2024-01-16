@@ -29,6 +29,18 @@ contract Revitu is
 
     uint256[47] private __gap;
 
+    /**
+     * @dev Disable implementation's initializer.
+     * See https://docs.openzeppelin.com/upgrades-plugins/1.x/writing-upgradeable#initializing_the_implementation_contract
+     */
+    /// @custom:oz-upgrades-unsafe-allow constructor
+    constructor() {
+        _disableInitializers();
+    }
+
+    //--------------------------------------//
+    //---------- public functions ----------//
+    //--------------------------------------//
     function initialize(
         address defaultAdmin,
         address minter,
@@ -73,11 +85,6 @@ contract Revitu is
         if (_isLocked[tokenId]) _isLocked[tokenId] = false;
     }
 
-    function isLocked(uint256 tokenId) public view virtual returns (bool) {
-        _requireMinted(tokenId);
-        return _isLocked[tokenId];
-    }
-
     function supportsInterface(
         bytes4 interfaceId
     )
@@ -110,6 +117,18 @@ contract Revitu is
         return _baseTokenURI;
     }
 
+    function isLocked(uint256 tokenId) public view virtual returns (bool) {
+        _requireMinted(tokenId);
+        return _isLocked[tokenId];
+    }
+
+    //----------------------------------------//
+    //---------- internal functions ----------//
+    //----------------------------------------//
+    function _authorizeUpgrade(
+        address newImplementation
+    ) internal virtual override onlyRole(UPGRADER_ROLE) {}
+
     function _beforeTokenTransfer(
         address from,
         address to,
@@ -132,6 +151,16 @@ contract Revitu is
         }
 
         super._beforeTokenTransfer(from, to, firstTokenId, batchSize);
+    }
+
+    function _burn(
+        uint256 tokenId
+    )
+        internal
+        virtual
+        override(ERC721Upgradeable, ERC721URIStorageUpgradeable)
+    {
+        super._burn(tokenId);
     }
 
     // same function with KIP17._safeTransfer()
@@ -163,24 +192,13 @@ contract Revitu is
         );
     }
 
-    function _burn(
-        uint256 tokenId
-    )
-        internal
-        virtual
-        override(ERC721Upgradeable, ERC721URIStorageUpgradeable)
-    {
-        super._burn(tokenId);
-    }
-
-    function _authorizeUpgrade(
-        address newImplementation
-    ) internal virtual override onlyRole(UPGRADER_ROLE) {}
-
     function _baseURI() internal view virtual override returns (string memory) {
         return _baseTokenURI;
     }
 
+    //---------------------------------------//
+    //---------- private functions ----------//
+    //---------------------------------------//
     // same function with KIP17._checkOnKIP17Received()
     function _checkOnKIP17Received(
         address from,
@@ -247,14 +265,5 @@ contract Revitu is
         } else {
             return true;
         }
-    }
-
-    /**
-     * @dev Disable implementation's initializer.
-     * See https://docs.openzeppelin.com/upgrades-plugins/1.x/writing-upgradeable#initializing_the_implementation_contract
-     */
-    /// @custom:oz-upgrades-unsafe-allow constructor
-    constructor() {
-        _disableInitializers();
     }
 }
