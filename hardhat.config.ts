@@ -27,7 +27,9 @@ const config: HardhatUserConfig = {
       optimizer: {
         // recommended when testing and debugging
         // https://hardhat.org/hardhat-network/docs/reference#solidity-optimizer-support
-        // enabled: true,
+        // enabled: false, // default: false
+
+        enabled: true,
       },
     },
   },
