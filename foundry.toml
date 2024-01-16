@@ -12,3 +12,5 @@ evm_version = "london"
 # recommended when testing and debugging
 # https://hardhat.org/hardhat-network/docs/reference#solidity-optimizer-support
 # optimizer = false # default: true
+
+solc_version = "0.8.19" # default: "0.8.23"
