@@ -8,8 +8,8 @@
     "compile": "hardhat compile",
     "test": "hardhat test",
     "format": "prettier --write .",
-    "lint": "solhint .",
-    "lint:fix": "solhint --fix --noPrompt ."
+    "lint": "solhint 'contracts/**/*.sol'",
+    "lint:fix": "solhint --fix --noPrompt 'contracts/**/*.sol'"
   },
   "keywords": [],
   "author": "",
