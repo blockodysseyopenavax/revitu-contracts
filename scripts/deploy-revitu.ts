@@ -16,6 +16,7 @@ async function main() {
     ],
     { kind: "uups" },
   );
+  await revitu.waitForDeployment();
 
   console.log("Revitu (proxy) deployed at", await revitu.getAddress());
   console.log(

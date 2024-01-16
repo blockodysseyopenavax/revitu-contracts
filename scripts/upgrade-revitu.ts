@@ -11,6 +11,7 @@ async function main() {
   const revitu = await upgrades.upgradeProxy(revituAddress, Revitu, {
     kind: "uups",
   });
+  await revitu.waitForDeployment();
 
   console.log("Revitu", revituAddress, "upgraded");
   console.log(
